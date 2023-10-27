@@ -21,7 +21,6 @@ def read_txt(filename):
     return phone_book
 
 def work_with_phonebooke():
-    # phone_book = read_txt("phonebook.txt")
     choice = show_menu()
     while choice != 7:
         if choice == 1:
@@ -29,7 +28,7 @@ def work_with_phonebooke():
             option.print_phone_book(read_txt("phonebook.txt"))
         elif choice == 2:
             print("Опция 2 выбрана: Найти телефон по фамилии", end="\n\n")
-            
+            option.find_phone_family(read_txt("phonebook.txt"))
         elif choice == 3:
             print("Опция 3 выбрана: Изменить номер телефона")
             # Здесь вы можете добавить код для изменения номера телефона.

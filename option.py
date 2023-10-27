@@ -1,5 +1,3 @@
-
-
 # 1. Распечатать справочник
 
 def print_phone_book(file_open):
@@ -16,7 +14,20 @@ def print_phone_book(file_open):
 # 2. Найти телефон по фамилии
 
 def find_phone_family(file_open):
-    print()
+    family = input("Введите фамилию абонента: ")
+    found_phone_record = []
+    found_fio_record = []
+    for record in file_open:
+        if record.get("Фамилия") == family:
+            found_phone_record.append(record.get("Телефон"))
+            found_fio_record.append(record.get("Фамилия"))
+            found_fio_record.append(record.get("Имя"))
+    fio = "".join(found_fio_record)
+    if found_phone_record:
+        for record in found_phone_record:
+            print(f"Телефон абонента {fio} -{record}")
+    else:
+        print("Абонент не найден")
 
 # 3. Изменить номер телефона
 
