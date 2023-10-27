@@ -31,7 +31,7 @@ def work_with_phonebooke():
             option.find_phone_family(read_txt("phonebook.txt"))
         elif choice == 3:
             print("Опция 3 выбрана: Изменить номер телефона")
-            # Здесь вы можете добавить код для изменения номера телефона.
+            option.change_phone_number(read_txt("phonebook.txt"), "phonebook.txt")
         elif choice == 4:
             print("Опция 4 выбрана: Удалить запись")
             # Здесь вы можете добавить код для удаления записи.

@@ -31,8 +31,40 @@ def find_phone_family(file_open):
 
 # 3. Изменить номер телефона
 
-def change_phone_number():
-    print()
+def change_phone_number(file_open, filename):
+    fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
+    confirm_w = False
+    while(confirm_w == False):
+        family = input("Введите фамилию абонента, номер которого хотетите изменить: ")
+        found_phone_record = []
+        found_fio_record = []
+        found_info_record = []
+        for record in file_open:
+            if record.get("Фамилия") == family:
+                found_phone_record.append(record.get("Телефон"))
+                found_fio_record.append(record.get("Фамилия"))
+                found_fio_record.append(record.get("Имя"))
+                found_info_record.append(record.get("Описание"))
+        fio = "".join(found_fio_record)
+        info = "".join(found_info_record)
+        if found_phone_record:
+            for record in found_phone_record:
+                print(f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
+        else:
+            print("Абонент не найден")
+        confirm = input("Все верно?\n1 - да   2 - нет\n")
+        if confirm == "1":
+            confirm_w = True
+        else:
+            confirm_w = False
+    new_phone = input("Введите новый номер телефона: ")
+    for record in file_open:
+        if record["Фамилия"] == family:
+            record["Телефон"] = new_phone
+    with open(filename, 'w', encoding='utf-8') as phb:
+        for record in file_open:
+            line = ','.join(record[field] for field in fields)
+            phb.write(line)
 
 # 4. Удалить запись
 
