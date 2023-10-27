@@ -34,7 +34,7 @@ def work_with_phonebooke():
             option.change_phone_number(read_txt("phonebook.txt"), "phonebook.txt")
         elif choice == 4:
             print("Опция 4 выбрана: Удалить запись")
-            # Здесь вы можете добавить код для удаления записи.
+            option.delete_record(read_txt("phonebook.txt"), "phonebook.txt")
         elif choice == 5:
             print("Опция 5 выбрана: Найти абонента по номеру телефона")
             # Здесь вы можете добавить код для поиска абонента по номеру телефона.
