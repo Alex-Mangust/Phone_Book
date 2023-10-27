@@ -21,15 +21,15 @@ def read_txt(filename):
     return phone_book
 
 def work_with_phonebooke():
-    phone_book = read_txt("phonebook.txt")
+    # phone_book = read_txt("phonebook.txt")
     choice = show_menu()
     while choice != 7:
         if choice == 1:
-            print("Опция 1 выбрана: Распечатать справочник")
-            option.pr()
+            print("Опция 1 выбрана: Распечатать справочник", end="\n\n")
+            option.print_phone_book(read_txt("phonebook.txt"))
         elif choice == 2:
-            print("Опция 2 выбрана: Найти телефон по фамилии")
-            # Здесь вы можете добавить код для поиска телефона по фамилии.
+            print("Опция 2 выбрана: Найти телефон по фамилии", end="\n\n")
+            
         elif choice == 3:
             print("Опция 3 выбрана: Изменить номер телефона")
             # Здесь вы можете добавить код для изменения номера телефона.
@@ -44,6 +44,11 @@ def work_with_phonebooke():
             # Здесь вы можете добавить код для добавления абонента в справочник.
         else:
             print("Недопустимый выбор. Выберите от 1 до 7.")
-        choice = show_menu()
+        print(end="\n\n")
+        next = int(input("Чтобы продолжить, введите 1: "))
+        if next == 1:
+            choice = show_menu()
+        else:
+            choice = 7
 
 work_with_phonebooke()
