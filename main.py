@@ -1,25 +1,28 @@
 import option
+
+
 def show_menu():
     print('1. Распечатать справочник',
-    '2. Найти телефон по фамилии',
-    '3. Изменить номер телефона',
-    '4. Удалить запись',
-    '5. Найти абонента по номеру телефона',
-    '6. Добавить абонента в справочник',
-    '7. Закончить работу', sep = '\n')
+          '2. Найти телефон по фамилии',
+          '3. Изменить номер телефона',
+          '4. Удалить запись',
+          '5. Найти абонента по номеру телефона',
+          '6. Добавить абонента в справочник',
+          '7. Закончить работу', sep='\n')
     choice = int(input("Выберите опцию: "))
     return choice
+
 
 def read_txt(filename):
     phone_book = []
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
-
     with open(filename, 'r', encoding='utf-8') as phb:
         for line in phb:
             values = line.strip().split(',')
             record = dict(zip(fields, values))
             phone_book.append(record)
     return phone_book
+
 
 def work_with_phonebooke():
     choice = show_menu()
@@ -32,7 +35,8 @@ def work_with_phonebooke():
             option.find_phone_family(read_txt("phonebook.txt"))
         elif choice == 3:
             print("Опция 3 выбрана: Изменить номер телефона")
-            option.change_phone_number(read_txt("phonebook.txt"), "phonebook.txt")
+            option.change_phone_number(
+                read_txt("phonebook.txt"), "phonebook.txt")
         elif choice == 4:
             print("Опция 4 выбрана: Удалить запись")
             option.delete_record(read_txt("phonebook.txt"), "phonebook.txt")
@@ -41,7 +45,8 @@ def work_with_phonebooke():
             option.find_subscriber_by_phone(read_txt("phonebook.txt"))
         elif choice == 6:
             print("Опция 6 выбрана: Добавить абонента в справочник")
-            option.add_subscriber_in_phonebook(read_txt("phonebook.txt"), "phonebook.txt")
+            option.add_subscriber_in_phonebook(
+                read_txt("phonebook.txt"), "phonebook.txt")
         else:
             print("Недопустимый выбор. Выберите от 1 до 7.")
         print(end="\n\n")
@@ -50,5 +55,6 @@ def work_with_phonebooke():
             choice = show_menu()
         else:
             choice = 7
+
 
 work_with_phonebooke()

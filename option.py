@@ -1,5 +1,4 @@
 # 1. Распечатать справочник
-
 def print_phone_book(file_open):
     keys_to_fio = ["Фамилия", "Имя"]
     keys_to_data = ["Телефон", "Описание"]
@@ -12,8 +11,8 @@ def print_phone_book(file_open):
         print(*values, end="")
         print()
 
-# 2. Найти телефон по фамилии
 
+# 2. Найти телефон по фамилии
 def find_phone_family(file_open):
     family = input("Введите фамилию абонента: ")
     found_phone_record = []
@@ -30,13 +29,14 @@ def find_phone_family(file_open):
     else:
         print("Абонент не найден")
 
-# 3. Изменить номер телефона
 
+# 3. Изменить номер телефона
 def change_phone_number(file_open, filename):
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
     confirm_w = False
-    while(confirm_w == False):
-        family = input("Введите фамилию абонента, номер которого хотетите изменить: ")
+    while (confirm_w == False):
+        family = input(
+            "Введите фамилию абонента, номер которого хотетите изменить: ")
         found_phone_record = []
         found_fio_record = []
         found_info_record = []
@@ -50,7 +50,8 @@ def change_phone_number(file_open, filename):
         info = "".join(found_info_record)
         if found_phone_record:
             for record in found_phone_record:
-                print(f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
+                print(
+                    f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
         else:
             print("Абонент не найден")
         confirm = input("Все верно?\n1 - да   2 - нет\n")
@@ -67,13 +68,14 @@ def change_phone_number(file_open, filename):
             line = ','.join(record[field] for field in fields)
             phb.write(line + "\n")
 
-# 4. Удалить запись
 
+# 4. Удалить запись
 def delete_record(file_open, filename):
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
     confirm_w = False
-    while(confirm_w == False):
-        family = input("Введите фамилию абонента, запись о котором вы хотите удалить: ")
+    while (confirm_w == False):
+        family = input(
+            "Введите фамилию абонента, запись о котором вы хотите удалить: ")
         found_phone_record = []
         found_fio_record = []
         found_info_record = []
@@ -87,7 +89,8 @@ def delete_record(file_open, filename):
         info = "".join(found_info_record)
         if found_phone_record:
             for record in found_phone_record:
-                print(f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
+                print(
+                    f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
         else:
             print("Абонент не найден")
         confirm = input("Все верно?\n1 - да   2 - нет\n")
@@ -105,8 +108,8 @@ def delete_record(file_open, filename):
             line = ','.join(record[field] for field in fields)
             phb.write(line + "\n")
 
-# 5. Найти абонента по номеру телефона
 
+# 5. Найти абонента по номеру телефона
 def find_subscriber_by_phone(file_open):
     phone = input("Введите номер телефона абонента: ")
     found_phone_record = []
@@ -126,8 +129,8 @@ def find_subscriber_by_phone(file_open):
     else:
         print("Абонент не найден")
 
-# 6. Добавить абонента в справочник
 
+# 6. Добавить абонента в справочник
 def add_subscriber_in_phonebook(file_open, filename):
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
     family = input("Введите фамилию абонента: ")
