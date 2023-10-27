@@ -10,6 +10,7 @@ def print_phone_book(file_open):
         print(*values, end=", ")
         values = [entry[key] for key in keys_to_data]
         print(*values, end="")
+        print()
 
 # 2. Найти телефон по фамилии
 
@@ -22,10 +23,10 @@ def find_phone_family(file_open):
             found_phone_record.append(record.get("Телефон"))
             found_fio_record.append(record.get("Фамилия"))
             found_fio_record.append(record.get("Имя"))
-    fio = "".join(found_fio_record)
+    fio = " ".join(found_fio_record)
     if found_phone_record:
         for record in found_phone_record:
-            print(f"Телефон абонента {fio} -{record}")
+            print(f"Телефон абонента {fio} - {record}")
     else:
         print("Абонент не найден")
 
@@ -45,7 +46,7 @@ def change_phone_number(file_open, filename):
                 found_fio_record.append(record.get("Фамилия"))
                 found_fio_record.append(record.get("Имя"))
                 found_info_record.append(record.get("Описание"))
-        fio = "".join(found_fio_record)
+        fio = " ".join(found_fio_record)
         info = "".join(found_info_record)
         if found_phone_record:
             for record in found_phone_record:
@@ -64,7 +65,7 @@ def change_phone_number(file_open, filename):
     with open(filename, 'w', encoding='utf-8') as phb:
         for record in file_open:
             line = ','.join(record[field] for field in fields)
-            phb.write(line)
+            phb.write(line + "\n")
 
 # 4. Удалить запись
 
@@ -82,7 +83,7 @@ def delete_record(file_open, filename):
                 found_fio_record.append(record.get("Фамилия"))
                 found_fio_record.append(record.get("Имя"))
                 found_info_record.append(record.get("Описание"))
-        fio = "".join(found_fio_record)
+        fio = " ".join(found_fio_record)
         info = "".join(found_info_record)
         if found_phone_record:
             for record in found_phone_record:
@@ -94,10 +95,6 @@ def delete_record(file_open, filename):
             confirm_w = True
         else:
             confirm_w = False
-    # new_phone = input("Введите новый номер телефона: ")
-    # for record in file_open:
-    #     if record["Фамилия"] == family:
-    #         record["Телефон"] = new_phone
     record_delete = 0
     for i in range(len(file_open)):
         if file_open[i].get("Фамилия") == family:
@@ -106,7 +103,7 @@ def delete_record(file_open, filename):
     with open(filename, 'w', encoding='utf-8') as phb:
         for record in file_open:
             line = ','.join(record[field] for field in fields)
-            phb.write(line)
+            phb.write(line + "\n")
 
 # 5. Найти абонента по номеру телефона
 
@@ -121,7 +118,7 @@ def find_subscriber_by_phone(file_open):
             found_fio_record.append(record.get("Фамилия"))
             found_fio_record.append(record.get("Имя"))
             found_info_record.append(record.get("Описание"))
-    fio = "".join(found_fio_record)
+    fio = " ".join(found_fio_record)
     info = "".join(found_info_record)
     if found_phone_record:
         for record in found_phone_record:
@@ -132,4 +129,16 @@ def find_subscriber_by_phone(file_open):
 # 6. Добавить абонента в справочник
 
 def add_subscriber_in_phonebook(file_open, filename):
-    print()
+    fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
+    family = input("Введите фамилию абонента: ")
+    name = input("Введите имя абонента: ")
+    phone = input("Введите номер телефона абонента: ")
+    info = input("Введите описание: ")
+    new_subscriber = [family, name, phone, info]
+    new_subscriber = dict(zip(fields, new_subscriber))
+    file_open.append(new_subscriber)
+    print(file_open)
+    with open(filename, 'w', encoding='utf-8') as phb:
+        for record in file_open:
+            line = ','.join(record[field] for field in fields)
+            phb.write(line + "\n")
