@@ -16,7 +16,8 @@ def read_txt(filename):
 
     with open(filename, 'r', encoding='utf-8') as phb:
         for line in phb:
-            record = dict(zip(fields, line.split(',')))
+            values = line.strip().split(',')
+            record = dict(zip(fields, values))
             phone_book.append(record)
     return phone_book
 
@@ -37,10 +38,10 @@ def work_with_phonebooke():
             option.delete_record(read_txt("phonebook.txt"), "phonebook.txt")
         elif choice == 5:
             print("Опция 5 выбрана: Найти абонента по номеру телефона")
-            # Здесь вы можете добавить код для поиска абонента по номеру телефона.
+            option.find_subscriber_by_phone(read_txt("phonebook.txt"))
         elif choice == 6:
             print("Опция 6 выбрана: Добавить абонента в справочник")
-            # Здесь вы можете добавить код для добавления абонента в справочник.
+            option.add_subscriber_in_phonebook(read_txt("phonebook.txt"), "phonebook.txt")
         else:
             print("Недопустимый выбор. Выберите от 1 до 7.")
         print(end="\n\n")

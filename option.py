@@ -110,10 +110,26 @@ def delete_record(file_open, filename):
 
 # 5. Найти абонента по номеру телефона
 
-def find_subscriber_by_phone():
-    print()
+def find_subscriber_by_phone(file_open):
+    phone = input("Введите номер телефона абонента: ")
+    found_phone_record = []
+    found_fio_record = []
+    found_info_record = []
+    for record in file_open:
+        if record.get("Телефон") == phone:
+            found_phone_record.append(record.get("Телефон"))
+            found_fio_record.append(record.get("Фамилия"))
+            found_fio_record.append(record.get("Имя"))
+            found_info_record.append(record.get("Описание"))
+    fio = "".join(found_fio_record)
+    info = "".join(found_info_record)
+    if found_phone_record:
+        for record in found_phone_record:
+            print(f"Абонент {fio}. Телефон - {record}. Описание - {info}")
+    else:
+        print("Абонент не найден")
 
 # 6. Добавить абонента в справочник
 
-def add_subscriber_in_phonebook():
+def add_subscriber_in_phonebook(file_open, filename):
     print()
