@@ -30,39 +30,36 @@ def find_phone_family(file_open):
         print("Абонент не найден")
 
 
-# 3. Изменить номер телефона
-def change_phone_number(file_open, filename):
+# 3. Изменить какое-либо  значение
+def change(file_open, filename):
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
-    confirm_w = False
-    while (confirm_w == False):
-        family = input(
-            "Введите фамилию абонента, номер которого хотетите изменить: ")
-        found_phone_record = []
-        found_fio_record = []
-        found_info_record = []
-        for record in file_open:
-            if record.get("Фамилия") == family:
-                found_phone_record.append(record.get("Телефон"))
-                found_fio_record.append(record.get("Фамилия"))
-                found_fio_record.append(record.get("Имя"))
-                found_info_record.append(record.get("Описание"))
-        fio = " ".join(found_fio_record)
-        info = "".join(found_info_record)
-        if found_phone_record:
-            for record in found_phone_record:
-                print(
-                    f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
-        else:
-            print("Абонент не найден")
-        confirm = input("Все верно?\n1 - да   2 - нет\n")
-        if confirm == "1":
-            confirm_w = True
-        else:
-            confirm_w = False
-    new_phone = input("Введите новый номер телефона: ")
+    print("По какому параметру хотите производить поиск?\n1. Фамилия\n2. Имя \n3. Телефон\n4. Описание")
+    field_input = int(input())
+    field_in = fields[field_input - 1]
+    famile_found = input("Введите свой запрос: ")
+    found_people = []
+    id = []
+    for record in range(len(file_open)):
+        if file_open[record].get(field_in) == famile_found:
+            found_people.append(file_open[record])
+            id.append(record)
+    if len(found_people) >= 2:
+        print("Найдено больше одного запроса, выберите 1")
+        for i in range(len(found_people)):
+            line = ', '.join('{} {}'.format(key, val) for key, val in sorted(found_people[i].items()))
+            # print(*i.values())
+            print(f"{i+1} - {line}")
+        vi = int(input())
+        vi = vi - 1
+    else:
+        vi = 0
+    print("Что вы хотите изменить?\n1. Фамилия\n2. Имя \n3. Телефон\n4. Описание")
+    change = int(input())
+    change_in = fields[change - 1]
+    new_record = input("Введите нове значение: ")
     for record in file_open:
-        if record["Фамилия"] == family:
-            record["Телефон"] = new_phone
+        if record == found_people[vi]:
+            record[change_in] = new_record
     with open(filename, 'w', encoding='utf-8') as phb:
         for record in file_open:
             line = ','.join(record[field] for field in fields)
@@ -91,22 +88,22 @@ def delete_record(file_open, filename):
             for record in found_phone_record:
                 print(
                     f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
+                confirm = input("Все верно?\n1 - да   2 - нет\n")
+                if confirm == "1":
+                    confirm_w = True
+                    record_delete = 0
+                    for i in range(len(file_open)):
+                        if file_open[i].get("Фамилия") == family:
+                            record_delete = i
+                    del file_open[record_delete]
+                    with open(filename, 'w', encoding='utf-8') as phb:
+                        for record in file_open:
+                            line = ','.join(record[field] for field in fields)
+                            phb.write(line + "\n")
+                else:
+                    confirm_w = False
         else:
             print("Абонент не найден")
-        confirm = input("Все верно?\n1 - да   2 - нет\n")
-        if confirm == "1":
-            confirm_w = True
-        else:
-            confirm_w = False
-    record_delete = 0
-    for i in range(len(file_open)):
-        if file_open[i].get("Фамилия") == family:
-            record_delete = i
-    del file_open[record_delete]
-    with open(filename, 'w', encoding='utf-8') as phb:
-        for record in file_open:
-            line = ','.join(record[field] for field in fields)
-            phb.write(line + "\n")
 
 
 # 5. Найти абонента по номеру телефона

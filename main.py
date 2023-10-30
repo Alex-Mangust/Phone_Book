@@ -6,7 +6,7 @@ def show_menu():
           '2. Найти телефон по фамилии',
           '3. Найти абонента по номеру телефона',
           '4. Добавить абонента в справочник',
-          '5. Изменить номер телефона',
+          '5. Изменить контакт',
           '6. Удалить запись',
           '7. Закончить работу', sep='\n')
     choice = input("Выберите опцию: ")
@@ -44,8 +44,8 @@ def work_with_phonebooke():
                 print("Опция 4 выбрана: Добавить абонента в справочник")
                 option.add_subscriber_in_phonebook(read_txt("phonebook.csv"), "phonebook.csv")
             elif choice == 5:
-                print("Опция 5 выбрана: Изменить номер телефона")
-                option.change_phone_number(read_txt("phonebook.csv"), "phonebook.csv")
+                print("Опция 5 выбрана: Изменить контакт")
+                option.change(read_txt("phonebook.csv"), "phonebook.csv")
             elif choice == 6:
                 print("Опция 6 выбрана: Удалить запись")
                 option.delete_record(read_txt("phonebook.csv"), "phonebook.csv")
@@ -56,6 +56,5 @@ def work_with_phonebooke():
             print(end="\n\n")
             next = input("Чтобы продолжить, введите любое значение: ")
         choice = show_menu()
-
 
 work_with_phonebooke()
