@@ -61,7 +61,7 @@ def add_subscriber_in_phonebook(file_open, filename):
     new_subscriber = [family, name, phone, info]
     new_subscriber = dict(zip(fields, new_subscriber))
     file_open.append(new_subscriber)
-    print(file_open)
+    # print(file_open)
     with open(filename, 'w', encoding='utf-8') as phb:
         for record in file_open:
             line = ','.join(record[field] for field in fields)
@@ -116,8 +116,7 @@ def delete_record(file_open, filename):
     fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
     confirm_w = False
     while (confirm_w == False):
-        family = input(
-            "Введите фамилию абонента, запись о котором вы хотите удалить: ")
+        family = input("Введите фамилию абонента, запись о котором вы хотите удалить: ")
         found_phone_record = []
         found_fio_record = []
         found_info_record = []
@@ -131,8 +130,7 @@ def delete_record(file_open, filename):
         info = "".join(found_info_record)
         if found_phone_record:
             for record in found_phone_record:
-                print(
-                    f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
+                print(f"Абонент - {fio}. Телефон - {record}. Описание - {info}")
                 confirm = input("Все верно?\n1 - да   2 - нет\n")
                 if confirm == "1":
                     confirm_w = True
@@ -146,7 +144,9 @@ def delete_record(file_open, filename):
                             line = ','.join(record[field] for field in fields)
                             phb.write(line + "\n")
                 else:
-                    confirm_w = False
+                    next_input = input("Хотите ввести другое значение?\n1 - да   2 - нет\n")
+                    if next_input == '2':
+                        confirm_w = True
         else:
             print("Абонент не найден")
             next = int(input("Продолжить?\n1. Да    2. Нет\n"))

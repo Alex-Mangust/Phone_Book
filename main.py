@@ -29,6 +29,7 @@ def work_with_phonebooke():
     while choice != 7:
         if choice.isdigit() == False:
             print("Недопустимый выбор. Выберите от 1 до 7.\n\n")
+            next = input("Чтобы продолжить, введите любое значение: ")
         else:
             choice = int(choice)
             if choice == 1:
